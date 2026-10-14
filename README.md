@@ -1,27 +1,45 @@
 # RAG-Based PDF Chat Application
 
-A beginner-friendly Retrieval-Augmented Generation application built with:
+🔗 **Live Demo:** [Try the RAG-Based PDF Chat Application](https://rag-pdf-chat-application-h5cxmzumrxnqbn7nd8zvvw.streamlit.app/)
+
+A beginner-friendly Retrieval-Augmented Generation (RAG) application that allows users to upload PDFs and ask questions about their content using AI.
+
+## Technologies Used
 
 - Python
 - Streamlit
 - LangChain Text Splitter
-- FAISS vector search
+- FAISS Vector Search
 - Google Gemini API
-- Gemini embeddings
+- Gemini Embeddings
 
 ## Architecture
 
-PDF -> Text extraction -> Chunking -> Embeddings -> FAISS index
-                                              |
-User question -> Query embedding -> Similarity search -> Top-K chunks
-                                              |
-                                      Gemini prompt
-                                              |
-                                           Answer
+```text
+PDF
+ |
+Text Extraction
+ |
+Chunking
+ |
+Embeddings
+ |
+FAISS Index
+ |
+User Question
+ |
+Query Embedding
+ |
+Similarity Search (Top-K Chunks)
+ |
+Gemini Prompt
+ |
+AI-Generated Answer
+```
 
 ## Setup
 
-### 1. Create a virtual environment
+### 1. Create a Virtual Environment
 
 Windows PowerShell:
 
@@ -37,44 +55,51 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
 ```
 
-### 2. Install packages
+### 2. Install Packages
 
 ```powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Add your Gemini API key
+### 3. Configure Your Gemini API Key
 
-Copy `.env.example` to `.env`:
+Copy `.env.example` to `.env` and add your API key:
 
 ```text
 GEMINI_API_KEY=your_real_key
 ```
 
-The app reads the key from the environment. Because the project uses `python-dotenv`, add this line at the top of `app.py` if your environment does not load `.env` automatically:
+If needed, add the following lines at the top of `app.py` to load environment variables:
 
 ```python
 from dotenv import load_dotenv
 load_dotenv()
 ```
 
-### 4. Run
+### 4. Run the Application
 
 ```powershell
 streamlit run app.py
 ```
 
-Open the local URL shown by Streamlit, normally:
+Open the local URL provided by Streamlit, usually:
 
-```text
 http://localhost:8501
-```
 
-## Important
+## Important Notes
 
-This version builds the FAISS index in memory. It does not save the index to disk.
+- The FAISS index is built in memory and is not saved to disk.
+- Scanned or image-only PDFs may require OCR to extract text.
+- Never commit your `.env` file or expose your Gemini API key.
 
-For scanned/image-only PDFs, text extraction may return little or no text. OCR can be added later.
+## Future Improvements
 
-Do not commit `.env` or expose your Gemini API key.
+- Add OCR support for scanned PDFs.
+- Save and reuse FAISS indexes.
+- Improve document processing and error handling.
+- Add support for multiple PDF documents.
+
+## Author
+
+Developed as a Python and Generative AI project to explore Retrieval-Augmented Generation, semantic search, and document question answering.
